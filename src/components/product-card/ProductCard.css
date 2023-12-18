@@ -1,0 +1,45 @@
+summary {
+    font-size: 12px;
+}
+
+button {
+    border: none;
+    padding: 5px 8px 5px 8px;
+    border-radius: 30px;
+    font-size: 12px;
+    background-color: #046AFD;
+    font-weight: 400;
+    color: white;
+}
+
+.card {
+    
+    text-align: center;
+    padding-left: 5%;
+}
+
+.image {
+    width: 50px;
+    height: 80px;
+}
+
+.image-container {
+    background-color: #FAFAFA;
+}
+
+.title {
+    width: 180px;
+    margin: 10px 0px 10px 0px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.description {
+    font-size: 9px;
+}
+
+.price {
+    font-size: 9px;
+    font-weight: bold;
+}
