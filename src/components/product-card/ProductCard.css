@@ -15,7 +15,9 @@ button {
 .card {
     
     text-align: center;
-    padding-left: 5%;
+    overflow-x: hidden;
+    padding: 5%;
+    margin: 5px;
 }
 
 .image {

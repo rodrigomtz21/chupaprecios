@@ -1,16 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
+import { Button, Col } from 'react-bootstrap';
 
 import './ProductCard.css'
 
 //Product List component, displays product detals and recieves 
 //products list, and the handler to amanage add products to cart
 const ProductCard = ({
-    product, handleAddToCart
+    product, handleAddToCart, isInProductList=true
 }) => {
-    const { description, title, thumbnail, price } = product;
+    const { asin, description, title, thumbnail, price } = product;
 
     return(
-        <div className='card' data-testid='card'>
+        
+        <Col className='card' data-testid='card'>
             <div className='image-container'>
                 <img src={thumbnail} alt={title} className='image' data-testid="image"/>
             </div>
@@ -20,8 +22,8 @@ const ProductCard = ({
                 <p className='description' data-testid="description">{description}</p>
             </details>
             <p className='price' data-testid='price'>${price}</p>
-            <button type="button" onClick={handleAddToCart}>Add to Cart</button>
-        </div>
+            {isInProductList && <Button variant="primary" onClick={() => handleAddToCart(asin)}>Add to Cart</Button>}
+        </Col>
     )
 }
 

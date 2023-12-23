@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ProductCard from "../product-card/ProductCard";
+import { Container, Row } from 'react-bootstrap';
 
 import './ProductList.css';
 
@@ -9,15 +10,17 @@ const ProductList = ({
 }) => {
     
     return(
-        <div className="list-container" data-testid="list-container">
-            {products.map(product => (
-                <ProductCard 
-                    key={product.asin} 
-                    product={product}
-                    handleAddToCart={handleAddToCart}
-                />
-            ))}
-        </div>
+        <Container fluid className="list-container" data-testid="list-container">
+            <Row xs={2} md={3} lg={4}>
+                {products.map(product => (
+                    <ProductCard 
+                        key={`${product.asin} ${product.title}`} 
+                        product={product}
+                        handleAddToCart={handleAddToCart}
+                    />
+                ))}
+            </Row>
+        </Container>
     )
 }
 

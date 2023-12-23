@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { PiShoppingCartFill } from "react-icons/pi";
 import ProductList from './components/product-list/ProductList';
+import ProductCard from './components/product-card/ProductCard';
+import { Button, Modal } from 'react-bootstrap';
 
 import './App.css';
 
@@ -9,6 +11,8 @@ function App() {
   const CATALOG_URL = '/chupaprecios/customcatalog/?search=perro&selected_store=amazon&page_num=1';
   const [products, setProducts] = useState({});
   const [cart, setCart] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+  const [productModal, setProductModal] = useState({});
 
   const getProductsCatalog = (token) => {
     //Fetch Products cataloge when we recieve the token from the first request.
@@ -57,14 +61,49 @@ function App() {
     
   }, []);
 
-  //Funtion to handle add products to cart
+  //Function to handle add products to cart
+  //Search product to add to cart and close modal confirmation
+  const handleAddToCart = (id) => {
+    
+    setProductModal(products.find(item => item.asin === id));
+    setShowModal(true);
+  };
+
+  //Function that just close modal confirmation
+  const handleClose = () => {
+    setShowModal(false);
+  };
+
   //Add 1 to the state counter when add to cart button is clicked
-  const handleAddToCart = () => {
+  //Close modal confirmation
+  const handleConfirmation = () => {
     setCart(cart + 1);
+    setShowModal(false);
   };
 
   return (
     <div className="App">
+      <Modal show={showModal} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add to cart confirmation!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <ProductCard 
+            key={productModal.asin} 
+            product={productModal}
+            handleAddToCart={() => {}}
+            isInProductList={false}
+        />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleConfirmation}>
+            Add to cart
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <div data-testid="bar" className='bar'>
         <PiShoppingCartFill />
         <div className='cart-count'> {cart}</div>
